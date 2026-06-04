@@ -23,7 +23,7 @@ else
 fi
 
 echo "--- Step 2: Processing data with C++ ---"
-# g++ -o main main.cpp parser.cpp
+g++ -o main main.cpp parser.cpp
 ./main "$STARTS" "$DATA"
 
 if [ $? -eq 0 ]; then

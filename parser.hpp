@@ -7,16 +7,18 @@
 #include <map>
 #include <sstream>
 
-struct Operation {
+struct Task {
     int job;
-    int operation;
+    int task;
     int start;
     int duration;
     int machineID;
 };
 
-void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>& ops);
-void parseSolutionFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>& ops);
-void exportToCSV(const std::map<std::pair<int, int>, Operation>& ops, const std::string& filename);
+struct 
+
+void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Task>& ops);
+void parseSolutionFile(std::ifstream& file, std::map<std::pair<int, int>, Task>& ops);
+void exportToCSV(const std::map<std::pair<int, int>, Task>& ops, const std::string& filename);
 
 #endif

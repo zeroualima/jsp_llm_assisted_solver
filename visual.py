@@ -12,7 +12,7 @@ job_colors = {job: cmap(i) for i, job in enumerate(unique_jobs)}
 
 for _, row in df.iterrows():
     job_id = row['Job']
-    op_id = row['Operation']
+    op_id = row['Task']
     machine_id = row['Machine']
 
     ax.broken_barh([(row['Start'], row['Duration'])], (machine_id - 0.4, 0.8), 

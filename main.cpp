@@ -10,20 +10,20 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::map<std::pair<int, int>, Operation> operations;
+    std::map<std::pair<int, int>, Task> Tasks;
 
     std::ifstream solutionFile(argv[1]);
     std::ifstream instanceFile(argv[2]);
     
     if (instanceFile.is_open()) {
-        parseInstanceFile(instanceFile, operations);
+        parseInstanceFile(instanceFile, Tasks);
     }
 
     if (solutionFile.is_open()) {
-        parseSolutionFile(solutionFile, operations);
+        parseSolutionFile(solutionFile, Tasks);
     }
 
-    // exportToCSV(operations, "jsp/results.csv");
+    // exportToCSV(Tasks, "jsp/results.csv");
 
     return 0;
 }

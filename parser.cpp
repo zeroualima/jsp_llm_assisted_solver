@@ -1,6 +1,6 @@
 #include "parser.hpp"
 
-void parseSolutionFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>& ops) {
+void parseSolutionFile(std::ifstream& file, std::map<std::pair<int, int>, Task>& tasks) {
     std::string line;
     while (std::getline(file, line)) {
         if (line.empty()) continue;
@@ -8,14 +8,14 @@ void parseSolutionFile(std::ifstream& file, std::map<std::pair<int, int>, Operat
         int j, o, val;
         // Parsing format: x_1_2 = 8;
         if (sscanf(line.c_str(), "%*c_%d_%d = %d;", &j, &o, &val) == 3) {
-            ops[{j, o}].job = j;
-            ops[{j, o}].operation = o;
-            ops[{j, o}].start = val;
+            tasks[{j, o}].job = j;
+            tasks[{j, o}].task = o;
+            tasks[{j, o}].start = val;
         }
     }
 }
 
-void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>& ops) {
+void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Task>& tasks) {
     std::string line;
     
     bool readingP = false;
@@ -41,8 +41,8 @@ void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Operat
 
             while (ss >> val) {
                 if (val != 0) {
-                    if (readingP) ops[{currentRow, currentCol}].duration = val;
-                    if (readingM) ops[{currentRow, currentCol}].machineID = val;
+                    if (readingP) tasks[{currentRow, currentCol}].duration = val;
+                    if (readingM) tasks[{currentRow, currentCol}].machineID = val;
                 }
                 ss >> comma; // consume the comma
                 currentCol++;
@@ -58,12 +58,12 @@ void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Operat
     }
 }
 
-void exportToCSV(const std::map<std::pair<int, int>, Operation>& ops, const std::string& filename) {
+void exportToCSV(const std::map<std::pair<int, int>, Task>& tasks, const std::string& filename) {
     std::ofstream file(filename);
-    file << "Job,Operation,Start,Duration,Machine\n"; // Header
+    file << "Job,Task,Start,Duration,Machine\n"; // Header
     
-    for (auto const& [key, op] : ops) {
-        file << op.job << "," << op.operation << "," << op.start << "," << op.duration << "," << op.machineID << "\n";
+    for (auto const& [key, task] : tasks) {
+        file << task.job << "," << task.task << "," << task.start << "," << task.duration << "," << task.machineID << "\n";
     }
     file.close();
 }
