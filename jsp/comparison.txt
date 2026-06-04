@@ -1,0 +1,75 @@
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatIntVars=226
+%%%mzn-stat: flatIntConstraints=240
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.136787
+%%%mzn-stat-end
+%%%mzn-stat: nodes=564906
+%%%mzn-stat: failures=1101
+%%%mzn-stat: restarts=950
+%%%mzn-stat: variables=225047
+%%%mzn-stat: intVars=226
+%%%mzn-stat: boolVariables=224819
+%%%mzn-stat: propagators=3406
+%%%mzn-stat: propagations=36704445
+%%%mzn-stat: peakDepth=8577
+%%%mzn-stat: nogoods=1101
+%%%mzn-stat: backjumps=11523
+%%%mzn-stat: peakMem=0.00
+%%%mzn-stat: time=14.965
+%%%mzn-stat: initTime=0.003
+%%%mzn-stat: solveTime=14.962
+%%%mzn-stat: objective=101
+%%%mzn-stat: optTime=14.870
+%%%mzn-stat: baseMem=0.00
+%%%mzn-stat: trailMem=24.03
+%%%mzn-stat: randomSeed=-1535890914
+%%%mzn-stat-end
+----------
+==========
+% [C > 100]
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+
+
+
+
+
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=3150
+%%%mzn-stat: flatIntVars=226
+%%%mzn-stat: flatBoolConstraints=1575
+%%%mzn-stat: flatIntConstraints=3375
+%%%mzn-stat: evaluatedReifiedConstraints=3150
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.301066
+%%%mzn-stat-end
+%%%mzn-stat: nodes=95193
+%%%mzn-stat: failures=813
+%%%mzn-stat: restarts=160
+%%%mzn-stat: variables=50861
+%%%mzn-stat: intVars=226
+%%%mzn-stat: boolVariables=50633
+%%%mzn-stat: propagators=6526
+%%%mzn-stat: propagations=10576914
+%%%mzn-stat: peakDepth=2636
+%%%mzn-stat: nogoods=813
+%%%mzn-stat: backjumps=3814
+%%%mzn-stat: peakMem=0.00
+%%%mzn-stat: time=1.126
+%%%mzn-stat: initTime=0.036
+%%%mzn-stat: solveTime=1.090
+%%%mzn-stat: objective=101
+%%%mzn-stat: optTime=1.060
+%%%mzn-stat: baseMem=0.00
+%%%mzn-stat: trailMem=0.94
+%%%mzn-stat: randomSeed=1977042893
+%%%mzn-stat-end
+----------
+==========
+% [C > 100]
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
