@@ -33,5 +33,6 @@ else
     exit 1
 fi
 
-echo "--- Step 3: Visualizing with Python ---"
-python3 visual.py
+echo "--- You can check dataset.jsonl ---"
+# echo "--- Step 3: Visualizing with Python ---"
+# python3 visual.py

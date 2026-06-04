@@ -1,6 +1,6 @@
 #include "parser.hpp"
 
-void parseStartsFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>& ops) {
+void parseSolutionFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>& ops) {
     std::string line;
     while (std::getline(file, line)) {
         if (line.empty()) continue;
@@ -15,7 +15,7 @@ void parseStartsFile(std::ifstream& file, std::map<std::pair<int, int>, Operatio
     }
 }
 
-void parseDataFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>& ops) {
+void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>& ops) {
     std::string line;
     
     bool readingP = false;

@@ -12,18 +12,18 @@ int main(int argc, char* argv[]) {
 
     std::map<std::pair<int, int>, Operation> operations;
 
-    std::ifstream startsFile(argv[1]);
-    std::ifstream dataFile(argv[2]);
-
-    if (startsFile.is_open()) {
-        parseStartsFile(startsFile, operations);
-    }
+    std::ifstream solutionFile(argv[1]);
+    std::ifstream instanceFile(argv[2]);
     
-    if (dataFile.is_open()) {
-        parseDataFile(dataFile, operations);
+    if (instanceFile.is_open()) {
+        parseInstanceFile(instanceFile, operations);
     }
 
-    exportToCSV(operations, "jsp/results.csv");
+    if (solutionFile.is_open()) {
+        parseSolutionFile(solutionFile, operations);
+    }
+
+    // exportToCSV(operations, "jsp/results.csv");
 
     return 0;
 }
