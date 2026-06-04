@@ -1,3 +1,34 @@
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=3150
+%%%mzn-stat: flatIntVars=226
+%%%mzn-stat: flatBoolConstraints=1575
+%%%mzn-stat: flatIntConstraints=3375
+%%%mzn-stat: evaluatedReifiedConstraints=3150
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.217429
+%%%mzn-stat-end
+%%%mzn-stat: nodes=95193
+%%%mzn-stat: failures=813
+%%%mzn-stat: restarts=160
+%%%mzn-stat: variables=50861
+%%%mzn-stat: intVars=226
+%%%mzn-stat: boolVariables=50633
+%%%mzn-stat: propagators=6526
+%%%mzn-stat: propagations=10576914
+%%%mzn-stat: peakDepth=2636
+%%%mzn-stat: nogoods=813
+%%%mzn-stat: backjumps=3814
+%%%mzn-stat: peakMem=0.00
+%%%mzn-stat: time=1.025
+%%%mzn-stat: initTime=0.039
+%%%mzn-stat: solveTime=0.986
+%%%mzn-stat: objective=101
+%%%mzn-stat: optTime=0.960
+%%%mzn-stat: baseMem=0.00
+%%%mzn-stat: trailMem=0.94
+%%%mzn-stat: randomSeed=1564456030
+%%%mzn-stat-end
 x_1_1 = 1;
 x_1_2 = 17;
 x_1_3 = 27;
@@ -226,3 +257,5 @@ x_15_15 = 96;
 ----------
 ==========
 % [C > 100]
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end

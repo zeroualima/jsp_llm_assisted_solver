@@ -23,20 +23,17 @@ void parseDataFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>
     int currentRow = 1;
 
     while (std::getline(file, line)) {
-        if (line.find("p = ") != std::string::npos) {
-            readingP = true; 
-            currentRow = 1;
-            continue;
-        }
-        if (line.find("m = ") != std::string::npos) {
+        if (line.find("job_task_machine = ") != std::string::npos) {
             readingM = true;
             currentRow = 1;
             continue;
         }
+        if (line.find("job_task_duration = ") != std::string::npos) {
+            readingP = true; 
+            currentRow = 1;
+            continue;
+        }
         if (readingP || readingM) {
-            // size_t pipePos = line.find('|');
-            // if (pipePos != std::string::npos) line = line.substr(pipePos + 1);
-
             std::stringstream ss(line);
             int val;
             int currentCol = 1;
@@ -44,10 +41,7 @@ void parseDataFile(std::ifstream& file, std::map<std::pair<int, int>, Operation>
 
             while (ss >> val) {
                 if (val != 0) {
-                    if (readingP) {
-                        std::cout << val << '\n';
-                        ops[{currentRow, currentCol}].duration = val;
-                    }
+                    if (readingP) ops[{currentRow, currentCol}].duration = val;
                     if (readingM) ops[{currentRow, currentCol}].machineID = val;
                 }
                 ss >> comma; // consume the comma
