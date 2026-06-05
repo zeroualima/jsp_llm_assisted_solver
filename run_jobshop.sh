@@ -13,7 +13,7 @@ STARTS="jsp/starts.txt"
 CSV="jsp/results.csv"
 
 echo "--- Step 1: Solving with MiniZinc ---"
-minizinc --solver chuffed --statistics -t 300000 "$MODEL" "$DATA" > "$STARTS"
+minizinc --solver chuffed --all-solutions --statistics -t 300000 "$MODEL" "$DATA" > "$STARTS"
 
 if [ $? -eq 0 ]; then
     echo "Success: Solution found and saved to $STARTS"
@@ -23,7 +23,7 @@ else
 fi
 
 echo "--- Step 2: Processing data with C++ ---"
-g++ -o main main.cpp parser.cpp
+g++ -o main main.cpp parser.cpp json_generator.cpp
 ./main "$STARTS" "$DATA"
 
 if [ $? -eq 0 ]; then
@@ -33,6 +33,5 @@ else
     exit 1
 fi
 
-echo "--- You can check dataset.jsonl ---"
-# echo "--- Step 3: Visualizing with Python ---"
-# python3 visual.py
+echo "--- Step 3: Visualizing with Python ---"
+python3 visual.py

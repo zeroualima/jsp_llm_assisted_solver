@@ -1,21 +1,6 @@
 #include "parser.hpp"
 
-void parseSolutionFile(std::ifstream& file, std::map<std::pair<int, int>, Task>& tasks) {
-    std::string line;
-    while (std::getline(file, line)) {
-        if (line.empty()) continue;
-
-        int j, o, val;
-        // Parsing format: x_1_2 = 8;
-        if (sscanf(line.c_str(), "%*c_%d_%d = %d;", &j, &o, &val) == 3) {
-            tasks[{j, o}].job = j;
-            tasks[{j, o}].task = o;
-            tasks[{j, o}].start = val;
-        }
-    }
-}
-
-void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Task>& tasks) {
+void parseInstanceFile(std::ifstream& file, Record& record) {
     std::string line;
     
     bool readingP = false;
@@ -23,6 +8,24 @@ void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Task>&
     int currentRow = 1;
 
     while (std::getline(file, line)) {
+        if (line.find("=") != std::string::npos && line.find(";") != std::string::npos) {
+            char key[64];
+            int val;
+
+            if (sscanf(line.c_str(), "%63[^ =] = %d;", key, &val) == 2) {
+                std::string varName(key);
+
+                if (varName == "n_jobs") {
+                    record.numJobs = val;
+                    continue;
+                } 
+                else if (varName == "n_machines") {
+                    record.numMachines = val;
+                    continue;
+                }
+            }
+        }
+
         if (line.find("job_task_machine = ") != std::string::npos) {
             readingM = true;
             currentRow = 1;
@@ -41,8 +44,8 @@ void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Task>&
 
             while (ss >> val) {
                 if (val != 0) {
-                    if (readingP) tasks[{currentRow, currentCol}].duration = val;
-                    if (readingM) tasks[{currentRow, currentCol}].machineID = val;
+                    if (readingP) record.tasks[{currentRow, currentCol}].duration = val;
+                    if (readingM) record.tasks[{currentRow, currentCol}].machineID = val;
                 }
                 ss >> comma; // consume the comma
                 currentCol++;
@@ -58,11 +61,67 @@ void parseInstanceFile(std::ifstream& file, std::map<std::pair<int, int>, Task>&
     }
 }
 
-void exportToCSV(const std::map<std::pair<int, int>, Task>& tasks, const std::string& filename) {
+void parseSolutionFile(std::ifstream& file, Record& record, std::ofstream& jsonlFile) {
+    std::string line;
+    while (std::getline(file, line)) {
+        // if (line.find("----------")) {
+        //     if (jsonlFile.is_open()) {
+        //         addJsonRecord(jsonlFile, record);
+        //     }
+        // }
+
+        if (line.find("makespan =") != std::string::npos && line.find(";") != std::string::npos) {
+            char key[64];
+            int val;
+            if (sscanf(line.c_str(), "%63[^ =] = %d;", key, &val) == 2) {
+                std::string varName(key);
+                if (varName == "makespan") {
+                    record.numJobs = val;
+                    continue;
+                } 
+            }
+        }
+
+        int j, o, val;
+        // Parsing format: x_1_2 = 8;
+        if (sscanf(line.c_str(), "%*c_%d_%d=%d;", &j, &o, &val) == 3) {
+            record.tasks[{j, o}].job = j;
+            record.tasks[{j, o}].task = o;
+            record.tasks[{j, o}].start = val;
+            continue;
+        }
+
+        if (line.find("%%%mzn-stat:") != std::string::npos) {
+            char key[64];
+            double val;
+
+            if (sscanf(line.c_str(), "%%%%%%mzn-stat: %63[^=]=%lf", key, &val) == 2) {
+                std::string statName(key);
+
+                // if (statName == "objective") {
+                //     record.makespan = static_cast<int>(val);
+                // } else 
+                if (statName == "nodes") {
+                    record.nodes = static_cast<int>(val);
+                } else if (statName == "failures") {
+                    record.failures = static_cast<int>(val);
+                } else if (statName == "solveTime") {
+                    record.solveTime = val;
+                } else if (statName == "randomSeed") {
+                    record.randomSeed = static_cast<int>(val);
+                }
+
+                // gapPercent ...
+            }
+        }
+    }
+}
+
+void exportToCSV(const std::map<std::pair<int, int>, Task>& Record, const std::string& filename) {
     std::ofstream file(filename);
-    file << "Job,Task,Start,Duration,Machine\n"; // Header
+    file << "Job,Task,Start,Duration,Machine\n";
     
-    for (auto const& [key, task] : tasks) {
+    for (auto const& [key, task] : Record) {
         file << task.job << "," << task.task << "," << task.start << "," << task.duration << "," << task.machineID << "\n";
     }
     file.close();

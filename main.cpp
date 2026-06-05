@@ -10,20 +10,21 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::map<std::pair<int, int>, Task> Tasks;
+    Record record;
 
-    std::ifstream solutionFile(argv[1]);
     std::ifstream instanceFile(argv[2]);
+    std::ifstream solutionFile(argv[1]);
+    std::ofstream jsonlFile("dataset.jsonl");
     
     if (instanceFile.is_open()) {
-        parseInstanceFile(instanceFile, Tasks);
+        parseInstanceFile(instanceFile, record);
     }
 
     if (solutionFile.is_open()) {
-        parseSolutionFile(solutionFile, Tasks);
+        parseSolutionFile(solutionFile, record, jsonlFile);
     }
 
-    // exportToCSV(Tasks, "jsp/results.csv");
+    exportToCSV(record.tasks, "jsp/results.csv");
 
     return 0;
 }
