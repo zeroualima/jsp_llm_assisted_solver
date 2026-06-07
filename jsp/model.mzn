@@ -40,14 +40,3 @@ constraint forall(j1, j2 in 1..n_jobs, i1, i2 in 1..n_machines
 % );
 
 solve minimize C;
-
-% Output format for C++ parsing
-output
-[
-  "makespan=\(C);\n"
-]
-++
-[
-    "x_\(j)_\(i)=\(x[j,i]);\n" 
-    | j in 1..n_jobs, i in 1..n_machines
-];

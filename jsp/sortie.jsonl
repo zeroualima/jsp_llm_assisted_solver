@@ -1,4 +1,4 @@
-{"type": "statistics", "statistics": {"paths": 0, "flatBoolVars": 180, "flatIntVars": 37, "flatBoolConstraints": 90, "flatIntConstraints": 216, "evaluatedReifiedConstraints": 180, "method": "minimize", "flatTime": 0.147708}}
+{"type": "statistics", "statistics": {"paths": 0, "flatBoolVars": 180, "flatIntVars": 37, "flatBoolConstraints": 90, "flatIntConstraints": 216, "evaluatedReifiedConstraints": 180, "method": "minimize", "flatTime": 0.102219}}
 {"type": "solution", "output": {"json": {  "x" : [[113, 114, 117, 136, 143, 171], [123, 131, 136, 146, 157, 192], [143, 149, 156, 167, 176, 177], [138, 143, 148, 153, 156, 164], [172, 181, 184, 189, 193, 196], [167, 170, 173, 182, 192, 196]],  "C" : 197}}, "sections": ["json"]}
 {"type": "solution", "output": {"json": {  "x" : [[113, 126, 129, 135, 142, 170], [121, 130, 135, 145, 156, 191], [142, 148, 155, 166, 175, 176], [137, 142, 147, 152, 155, 163], [171, 180, 183, 188, 192, 195], [166, 169, 172, 181, 191, 195]],  "C" : 196}}, "sections": ["json"]}
 {"type": "solution", "output": {"json": {  "x" : [[113, 125, 128, 134, 141, 148], [120, 129, 134, 144, 155, 190], [141, 147, 154, 165, 174, 175], [136, 141, 146, 151, 154, 162], [170, 179, 182, 187, 191, 194], [165, 168, 171, 180, 190, 194]],  "C" : 195}}, "sections": ["json"]}
@@ -142,6 +142,6 @@
 {"type": "solution", "output": {"json": {  "x" : [[1, 11, 17, 27, 40, 50], [0, 9, 16, 28, 38, 52], [2, 7, 11, 19, 30, 31], [8, 14, 30, 35, 38, 47], [14, 23, 26, 43, 48, 51], [13, 16, 19, 28, 46, 55]],  "C" : 56}}, "sections": ["json"]}
 {"type": "solution", "output": {"json": {  "x" : [[25, 27, 30, 36, 43, 49], [0, 8, 15, 29, 40, 50], [1, 6, 10, 18, 29, 30], [8, 13, 28, 33, 37, 46], [13, 22, 25, 39, 51, 54], [14, 17, 20, 30, 45, 53]],  "C" : 55}}, "sections": ["json"]}
 {"type": "status", "status": "OPTIMAL_SOLUTION"}
-{"type": "statistics", "statistics": {"nodes": 11492, "failures": 142, "restarts": 142, "variables": 14908, "intVars": 37, "boolVariables": 14869, "propagators": 397, "propagations": 315745, "peakDepth": 480, "nogoods": 142, "backjumps": 1083, "peakMem": 0.0, "time": 0.102, "initTime": 0.02, "solveTime": 0.082, "objective": 55, "optTime": 0.082, "baseMem": 0.0, "trailMem": 0.02, "randomSeed": 452654752}}
+{"type": "statistics", "statistics": {"nodes": 11492, "failures": 142, "restarts": 142, "variables": 14908, "intVars": 37, "boolVariables": 14869, "propagators": 397, "propagations": 315745, "peakDepth": 480, "nogoods": 142, "backjumps": 1083, "peakMem": 0.0, "time": 0.06900000000000001, "initTime": 0.011, "solveTime": 0.058, "objective": 55, "optTime": 0.058, "baseMem": 0.0, "trailMem": 0.02, "randomSeed": 272164379}}
 {"type": "comment", "comment": "% [C > 54]\n"}
 {"type": "statistics", "statistics": {"nSolutions": 142}}

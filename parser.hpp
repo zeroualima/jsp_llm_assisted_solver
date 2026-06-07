@@ -17,8 +17,8 @@ struct Task {
 };
 
 struct Record {
-    std::string source; //
-    std::string id; //
+    std::string source;
+    std::string id;
     int numJobs;
     int numMachines;
     std::map<std::pair<int, int>, Task> tasks;
@@ -26,7 +26,7 @@ struct Record {
     int makespan;
     int optimalMakespan; //
     double gapPercent; //
-    bool isOptimal; //
+    bool isOptimal;
 
     int nodes;
     int failures;

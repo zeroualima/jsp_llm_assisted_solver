@@ -13,7 +13,8 @@ STARTS="jsp/starts.txt"
 CSV="jsp/results.csv"
 
 echo "--- Step 1: Solving with MiniZinc ---"
-minizinc --solver chuffed --all-solutions --statistics -t 300000 "$MODEL" "$DATA" > "$STARTS"
+# minizinc --solver chuffed --all-solutions --statistics -t 300000 "$MODEL" "$DATA" > "$STARTS"
+minizinc --solver Chuffed --all-solutions --statistics -t 300000 --output-mode json  --json-stream "$MODEL" "$DATA" > "$STARTS"
 
 if [ $? -eq 0 ]; then
     echo "Success: Solution found and saved to $STARTS"

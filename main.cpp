@@ -24,7 +24,11 @@ int main(int argc, char* argv[]) {
         parseSolutionFile(solutionFile, record, jsonlFile);
     }
 
-    exportToCSV(record.tasks, "jsp/results.csv");
+    if (jsonlFile.is_open()) {
+        addJsonRecord(jsonlFile, record);
+    }
+
+    // exportToCSV(record.tasks, "jsp/results.csv");
 
     return 0;
 }
