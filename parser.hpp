@@ -24,8 +24,8 @@ struct Record {
     std::map<std::pair<int, int>, Task> tasks;
 
     int makespan;
-    int optimalMakespan; //
-    double gapPercent; //
+    int optimalMakespan;
+    double gapPercent;
     bool isOptimal;
 
     int nodes;
