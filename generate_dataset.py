@@ -3,15 +3,14 @@ import json
 import random
 import subprocess
 
-NUM_INSTANCES_PER_COMBINATION = 1 # 500  # Target scale per explicit combination
+NUM_INSTANCES_PER_COMBINATION = 1 #500  # Target scale per explicit combination
 DURATION_RANGES = [5] #, 20, 100]
 MATRIX_SIZES = [[5, 5]] #, [6, 6], [8, 8], [10, 10], [10, 15], [10, 20], [15, 15], [20, 15], [20, 20]]
 MODEL_PATH = "jsp/model.mzn"
 DATASET_FILE = "dataset.jsonl"
-TIMEOUT_MS = 60000                  # 1 minute per instance
+TIMEOUT_MS = 60000  ##### 1 minute per instance or 15 = 900000??
 
 def generate_random_instance(num_jobs, num_machines, duration_range):
-    """Generates random Job Shop data matching the matrix format."""
     durations = []
     machines = []
     
@@ -50,6 +49,7 @@ def run_pipeline():
                 instance = generate_random_instance(nj, nm, dur_max)
 
                 temp_json = "jsp/temp_data.json"
+                # temp_json = f"jsp/temp_data_{os.getpid()}_{local_idx}.json"
                 with open(temp_json, "w") as f:
                     json.dump(instance, f)
 
@@ -62,6 +62,10 @@ def run_pipeline():
                 ]
 
                 result = subprocess.run(cmd, capture_output=True, text=True)
+
+                if os.path.exists(temp_json):
+                    os.remove(temp_json)
+
                 if result.returncode != 0:
                     print(f"MiniZinc failed with exit code {result.returncode}!")
                     print(f"Error details (stderr): {result.stderr}")
@@ -82,7 +86,7 @@ def run_pipeline():
                             final_status = entry["status"]
                         elif entry["type"] == "statistics": 
                             solver_stats.update(entry["statistics"])
-                    except json.JSONDecodeError:
+                    except (json.JSONDecodeError, KeyError, TypeError):
                         continue
 
                 solver_proved_optimality = (final_status == "OPTIMAL_SOLUTION")
@@ -120,7 +124,7 @@ def run_pipeline():
                                 "gap_percent": round(gap_percent, 2),
                                 "is_optimal": True if (is_last and solver_proved_optimality) else False
                             },
-                            "solver_stats": {
+                            "solver_stats": { # These concern the full search not each solution
                                 "nodes": solver_stats.get("nodes", 0),
                                 "failures": solver_stats.get("failures", 0),
                                 "solve_time": solver_stats.get("solveTime", 0.0)
@@ -130,8 +134,7 @@ def run_pipeline():
                 
                 global_instance_idx += 1
 
-    if os.path.exists(temp_json):
-        os.remove(temp_json)
+    
         
     print("\nDataset generation complete!")
 
