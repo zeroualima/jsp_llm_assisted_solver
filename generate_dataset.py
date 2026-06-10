@@ -26,10 +26,7 @@ MODEL_PATH = "model.mzn"
 TIMEOUT_MS = 900000  # 15 minutes per MiniZinc invocation
 
 
-# ---------------------------------------------------------------------------
 # Instance generation
-# ---------------------------------------------------------------------------
-
 def generate_random_instance(num_jobs, num_machines, duration_range, rng):
     """Generate one random JSP instance using the given Random object."""
     durations = []
@@ -48,10 +45,7 @@ def generate_random_instance(num_jobs, num_machines, duration_range, rng):
     }
 
 
-# ---------------------------------------------------------------------------
 # Single-instance pipeline (runs inside a worker process)
-# ---------------------------------------------------------------------------
-
 def run_single_instance(args):
     """
     Generate one instance, solve it with MiniZinc, return a list of JSONL
@@ -89,9 +83,8 @@ def run_single_instance(args):
             )
             return []
 
-        # ----------------------------------------------------------------
+        
         # Parse the JSON-stream output
-        # ----------------------------------------------------------------
         solution_list = []
         final_status = "UNKNOWN"
         solver_stats = {}
@@ -117,18 +110,15 @@ def run_single_instance(args):
         best_makespan_found = solution_list[-1]["C"]
         optimal_makespan = best_makespan_found if solver_proved_optimality else -1
 
-        # ----------------------------------------------------------------
+        
         # Build one record per improving solution (training data density)
-        # ----------------------------------------------------------------
         records = []
         for i, sol in enumerate(solution_list):
             is_last = (i == len(solution_list) - 1)
             current_makespan = sol["C"]
 
             if solver_proved_optimality:
-                gap_percent = (
-                    (current_makespan - optimal_makespan) * 100.0
-                ) / optimal_makespan
+                gap_percent = ((current_makespan - optimal_makespan) * 100.0) / optimal_makespan
             else:
                 gap_percent = -1.0
 
@@ -165,10 +155,7 @@ def run_single_instance(args):
             os.remove(temp_json)
 
 
-# ---------------------------------------------------------------------------
 # Main entry point
-# ---------------------------------------------------------------------------
-
 def parse_args():
     parser = argparse.ArgumentParser(description="JSP dataset generator (cluster-ready)")
     parser.add_argument("--nj",            type=int, required=True, help="Number of jobs")
