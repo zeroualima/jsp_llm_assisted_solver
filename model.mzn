@@ -30,13 +30,4 @@ constraint forall(j1, j2 in 1..n_jobs, i1, i2 in 1..n_machines
     x[j1, i1] + job_task_duration[j1, i1] <= x[j2, i2] \/ x[j2, i2] + job_task_duration[j2, i2] <= x[j1, i1]
 );
 
-% include "disjunctive.mzn";
-% % No Overlap
-% constraint forall(machine in 1..n_machines)(
-%   disjunctive(
-%     [x[j, i] | j in 1..n_jobs, i in 1..n_machines where m[j, i] == machine],
-%     [p[j, i] | j in 1..n_jobs, i in 1..n_machines where m[j, i] == machine]
-%   )
-% );
-
 solve minimize C;
