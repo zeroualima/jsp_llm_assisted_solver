@@ -1,32 +1,67 @@
-#include <bits/stdc++.h>
-#include <nlohmann/json.hpp>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <cstdint>
 
-using json = nlohmann::json;
 
 int main() {
-    int total=0, gap0=0, gap5=0, gap10=0, gap15=0, gapRest=0;
+    uint64_t total = 0;
+    uint64_t optimal = 0;
+    uint64_t unknown = 0;
+    uint64_t gap1 = 0;
+    uint64_t gap2 = 0;
+    uint64_t gap3 = 0;
+    uint64_t gapRest = 0;
 
     std::ifstream file("../dataset.jsonl");
     std::string line;
 
+    const std::string key = "\"gap_percent\":";
+
     while (std::getline(file, line)) {
-        total++;
+        ++total;
+        std::cout << total << '\n';
 
-        json j = json::parse(line);
+        size_t pos = line.find(key);
+        if (pos == std::string::npos)
+            continue;
 
-        int gapPercent = j["solution"]["gap_percent"];
+        const char* p = line.c_str() + pos + key.size();
 
-        if (gapPercent == 0) gap0++;
-        else if (gapPercent <= 5) gap5++;
-        else if (gapPercent <= 10) gap10++;
-        else if (gapPercent <= 15) gap15++;
-        else gapRest++;
+        double g = std::strtod(p, nullptr);
+
+        if (g == 0.0)
+            ++optimal;
+        else if (g == -1.0)
+            ++unknown;
+        else if (g <= 0.5)
+            ++gap1;
+        else if (g <= 1.0)
+            ++gap2;
+        else if (g <= 2.0)
+            ++gap3;
+        else
+            ++gapRest;
     }
 
-    printf("The total number of records is : %d\n", total);
-    printf("Those with optimal gap : %d\n", gap0);
-    printf("Those with gap_percent <= 5 : %d\n", gap5);
-    printf("Those with gap_percent <= 10 : %d\n", gap10);
-    printf("Those with gap_percent <= 15 : %d\n", gap15);
-    printf("Those with gap_percent > 15 : %d\n", gapRest);
+    std::cout << "Total records: " << total << '\n';
+    std::cout << "optimal: " << optimal << '\n';
+    std::cout << "unknown: " << unknown << '\n';
+    std::cout << "0 < gap <= 1: " << gap1 << '\n';
+    std::cout << "1 < gap <= 2: " << gap2 << '\n';
+    std::cout << "2 < gap <= 3: " << gap3 << '\n';
+    std::cout << "gap > 3: " << gapRest << '\n';
 }
+
+/*
+OUTPUT :
+
+Total records: 25208427
+optimal: 15997
+unknown: 8177561
+0 < gap <= 1: 18217
+1 < gap <= 2: 24334
+2 < gap <= 3: 49862
+gap > 3: 16922456
+*/
