@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main() {
-    std::ifstream file("../filtered_dataset.jsonl");
+    std::ifstream file("../train.jsonl");
 
     std::string line;
     
