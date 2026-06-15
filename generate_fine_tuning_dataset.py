@@ -15,8 +15,7 @@ def transform(input_path, output_path):
             }
             
             completion_obj = {
-                "starts":   record["solution"]["starts"],
-                "makespan": record["solution"]["makespan"]
+                "starts":   record["solution"]["starts"]
             }
             
             text = (
