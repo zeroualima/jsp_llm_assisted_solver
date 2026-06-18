@@ -19,6 +19,9 @@ def split(input_path, train_path, val_path) :
     train_ids = set(ids[:17550])
     val_ids = set(ids[17550:])
 
+    train_lines = 0
+    val_lines = 0
+
     with open(input_path, 'r') as f, \
         open(train_path, 'w') as ftrain, \
         open(val_path, 'w') as fval : 
@@ -26,8 +29,13 @@ def split(input_path, train_path, val_path) :
             record = json.loads(line)
             if record["instance"]["id"] in train_ids :
                 ftrain.write(line)
+                train_lines += 1
             else :
                 fval.write(line)
+                val_lines += 1
+
+    print("Wrote ", train_lines, " records in train.jsonl")
+    print("Wrote ", val_lines, " records in val.jsonl")
 
 def parse_args() :
     parser = argparse.ArgumentParser(description="Filtered dataset 90/10 splitter")
