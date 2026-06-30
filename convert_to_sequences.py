@@ -106,7 +106,7 @@ def main():
             makespan = sol["makespan"]
 
             if key in best_by_sequence:
-                if makespan < best_by_sequence[key]["solution"]["makespan"]:
+                if makespan < best_by_sequence[key][0]["solution"]["makespan"]:
                     best_by_sequence[key] = (rec, sequences)
                 size_stats[size_key]["duplicates_removed"] += 1
                 total_duplicates_removed += 1

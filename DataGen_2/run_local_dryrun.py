@@ -29,7 +29,7 @@ DRY_RUN_COMBOS = [
 ]
 
 OUTPUT_DIR = "./dryrun_parts"
-WORKERS = 4  # adjust to your machine's core count (leave 1-2 cores free)
+WORKERS = 6  # adjust to your machine's core count (leave 1-2 cores free)
 
 
 def run_combo(nj, nm, dur_max, num_instances, task_id):
