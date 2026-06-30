@@ -1,5 +1,5 @@
 import json
-from llm import generate_continuation
+from lds_llm.llm import generate_continuation
 
 def fill_seq(num_jobs, num_machines, machines):
     sequences = [[] for _ in range(num_machines)]

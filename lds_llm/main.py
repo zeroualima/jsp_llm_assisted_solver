@@ -1,7 +1,7 @@
 from minizinc import Instance, Model, Solver
 import json
-from llm import generate_continuation
-from utils import parse_model_starts, precedences
+from lds_llm.llm import generate_continuation
+from lds_llm.utils import parse_model_starts, precedences
 
 def solve(instance) :
     num_jobs = instance["num_jobs"]
