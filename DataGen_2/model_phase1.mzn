@@ -1,0 +1,32 @@
+% Phase 1: find the best makespan i_o within a timeout, optimization mode.
+% No --all-solutions used when invoking this -- we only want the final
+% (best found) objective value, not a stream of improving solutions.
+
+int: n_jobs;
+int: n_machines;
+
+set of int: jobs = 1..n_jobs;
+set of int: tasks = 1..n_machines;
+
+array[1..n_jobs, 1..n_machines] of int: job_task_duration;
+array[1..n_jobs, 1..n_machines] of int: job_task_machine;
+
+int: total_max_time = sum(job_task_duration);
+array[1..n_jobs, 1..n_machines] of var 0..total_max_time: x;
+var 0..total_max_time: C;
+
+constraint forall(j in 1..n_jobs, i in 1..n_machines-1) (
+    x[j, i] + job_task_duration[j, i] <= x[j, i+1]
+);
+
+constraint forall(j in 1..n_jobs) (
+    x[j, n_machines] + job_task_duration[j, n_machines] <= C
+);
+
+constraint forall(j1, j2 in 1..n_jobs, i1, i2 in 1..n_machines
+    where (j1 < j2) /\ job_task_machine[j1, i1] == job_task_machine[j2, i2]
+)(
+    x[j1, i1] + job_task_duration[j1, i1] <= x[j2, i2] \/ x[j2, i2] + job_task_duration[j2, i2] <= x[j1, i1]
+);
+
+solve minimize C;
