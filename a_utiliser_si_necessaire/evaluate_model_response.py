@@ -1,18 +1,22 @@
 import json
-from model import generate_continuation
-from machine_sequence import fill_seq, sort_seq
+from llm import generate_continuation
 
+def fill_seq(num_jobs, num_machines, machines):
+    sequences = [[] for _ in range(num_machines)]
+    for j in range(num_jobs):
+        for i in range(num_machines):
+            m = machines[j][i]
+            sequences[m].append((j, i))
+    return sequences
 
-def parse_model_starts(model_continuation):
-    """Recover the JSON object, tolerating the missing leading '{\"'."""
-    text = model_continuation
-    if "</completion>" in text:
-        text = text.split("</completion>")[0]
-    text = text.strip()
-    if not text.startswith("{"):
-        text = "{\"" + text
-    return json.loads(text)["starts"]
+def sort_seq(sequences, starts):
+    for m in range(len(sequences)):
+        sequences[m].sort(key=lambda task: starts[task[0]][task[1]])
+    return sequences
 
+def sequences(num_jobs, num_machines, machines, starts) :
+    tmp = fill_seq(num_jobs, num_machines, machines)
+    return sort_seq(tmp, starts)
 
 def check_shape(num_jobs, num_machines, model_starts):
     if not isinstance(model_starts, list) or len(model_starts) != num_jobs:
@@ -23,7 +27,6 @@ def check_shape(num_jobs, num_machines, model_starts):
         if not all(isinstance(v, int) for v in job_row):
             return False
     return True
-
 
 def check_monotonic_order(num_jobs, num_machines, starts):
     """True if every job's start times are non-decreasing (no reversed order)."""

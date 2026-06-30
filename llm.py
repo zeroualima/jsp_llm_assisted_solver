@@ -11,7 +11,6 @@ bnb_config = BitsAndBytesConfig(
     bnb_4bit_compute_dtype=torch.bfloat16,
     bnb_4bit_use_double_quant=True,
 )
-
 tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
 tokenizer.pad_token = tokenizer.eos_token
 
@@ -28,7 +27,7 @@ print("Model ready.")
 
 import json
 
-def generate_continuation(partial_text, max_new_tokens=300):
+def generate_continuation(partial_text, max_new_tokens=10000):
     inputs = tokenizer(partial_text, return_tensors="pt").to(model.device)
     with torch.no_grad():
         output_ids = model.generate(
@@ -39,14 +38,3 @@ def generate_continuation(partial_text, max_new_tokens=300):
         )
     full_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
     return full_text[len(partial_text):]
-
-instance = {
-    "num_jobs": 3, "num_machines": 3,
-    "durations": [[10, 9, 1], [6, 10, 3], [1, 7, 9]],
-    "machines": [[2, 1, 0], [1, 2, 0], [2, 0, 1]]
-}
-base_prompt = f"<prompt>{json.dumps(instance)}</prompt><completion>"
-
-# cont = generate_continuation(base_prompt)
-# print(f"\nPrefix: {repr(prefix)}")
-# print(f"Continues with: {repr(cont[:100])}")
