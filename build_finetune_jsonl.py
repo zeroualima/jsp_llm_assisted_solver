@@ -17,8 +17,8 @@ from collections import defaultdict
 # benchmark-relevant -- duplicated this many extra times in the TRAIN split
 # only (never touch val -- oversampling val would distort your eval numbers).
 OVERSAMPLE_WEIGHTS = {
-    (12, 10): 2, (12, 12): 2,
-    (15, 12): 3, (15, 15): 4, (20, 15): 5,
+    (12, 10): 1, (12, 12): 1,
+    (15, 12): 2, (15, 15): 3, (20, 15): 5,
 }
 DEFAULT_WEIGHT = 1
 VAL_FRACTION = 0.10

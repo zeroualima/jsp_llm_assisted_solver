@@ -6,7 +6,7 @@
 #SBATCH --gres=gpu:rtx_a6000:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
-#SBATCH --time=48:00:00
+#SBATCH --time=9-00:00:00
 #SBATCH --output=logs/ft_%j.out
 #SBATCH --error=logs/ft_%j.err
 #SBATCH --mail-type=FAIL,END

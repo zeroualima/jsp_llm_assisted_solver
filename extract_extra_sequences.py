@@ -9,7 +9,6 @@ way convert_to_sequences.py does, then deduplicates by sequence signature.
 
 The gap formula used throughout this project:
     gap = (current_makespan - optimal_makespan) / current_makespan * 100
-(not the supervisor's ratio convention -- consistent with original filtering)
 
 Reads:
     - sequences.jsonl (already-converted base dataset, used to detect which

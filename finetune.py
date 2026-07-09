@@ -15,8 +15,8 @@ TRAIN_FILE     = "/home/mazerouali/jsp_records/train_ft.jsonl"
 VAL_FILE       = "/home/mazerouali/jsp_records/val_ft.jsonl"
 MAX_LEN_FILE   = "/home/mazerouali/jsp_records/max_length.json"
 OUTPUT_DIR     = "/home/mazerouali/jsp_records/checkpoints_v2"
-BATCH_SIZE     = 4
-GRAD_ACC_STEPS = 8
+BATCH_SIZE     = 2
+GRAD_ACC_STEPS = 16
 NUM_EPOCHS     = 3
 LEARNING_RATE  = 2e-4
 
