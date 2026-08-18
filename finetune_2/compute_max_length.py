@@ -6,11 +6,7 @@ rather than a guess.
 Writes max_length.json alongside the output files so finetune.py can read it.
 
 Usage:
-    python3 compute_max_length.py \
-        --train train_ft.jsonl --val val_ft.jsonl \
-        --model meta-llama/Meta-Llama-3.1-8B-Instruct \
-        --margin 1.10 \
-        --out max_length.json
+    python3 compute_max_length.py --train train_ft.jsonl --val val_ft.jsonl --model meta-llama/Meta-Llama-3.1-8B-Instruct --margin 1.10 --out max_length.json
 """
 
 import json

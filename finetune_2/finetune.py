@@ -11,14 +11,14 @@ from datasets import load_dataset
 # ---------------------------------------------------------------------------
 MODEL_ID       = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 HF_TOKEN       = os.environ["HF_TOKEN"]
-TRAIN_FILE     = "/home/mazerouali/jsp_records/train_ft.jsonl"
-VAL_FILE       = "/home/mazerouali/jsp_records/val_ft.jsonl"
+TRAIN_FILE     = "/home/mazerouali/jsp_records/train_ft_nl.jsonl"
+VAL_FILE       = "/home/mazerouali/jsp_records/val_ft_nl.jsonl"
 MAX_LEN_FILE   = "/home/mazerouali/jsp_records/max_length.json"
-OUTPUT_DIR     = "/home/mazerouali/jsp_records/checkpoints_v2"
+OUTPUT_DIR     = "/home/mazerouali/jsp_records/checkpoints_v3"
 BATCH_SIZE     = 2
 GRAD_ACC_STEPS = 16
 NUM_EPOCHS     = 3
-LEARNING_RATE  = 2e-4
+LEARNING_RATE  = 5e-5
 
 # ---------------------------------------------------------------------------
 # Load empirically computed max_length -- NEVER hardcode this.
@@ -121,13 +121,15 @@ sft_config = SFTConfig(
     gradient_accumulation_steps=GRAD_ACC_STEPS,
     learning_rate=LEARNING_RATE,
     lr_scheduler_type="cosine",
-    warmup_ratio=0.05,
+    max_grad_norm=0.3,
+    warmup_ratio=0.10,
     bf16=True,
     max_length=MAX_SEQ_LEN,
     dataset_text_field="text",
     logging_steps=50,
     eval_strategy="epoch",
     save_strategy="epoch",
+    save_steps=500,
     save_total_limit=2,
     load_best_model_at_end=True,
     report_to="none",
@@ -140,5 +142,5 @@ trainer = SFTTrainer(
     eval_dataset=dataset["validation"],
     processing_class=tokenizer,
 )
-trainer.train()
+trainer.train(resume_from_checkpoint=True)
 trainer.save_model(OUTPUT_DIR + "/final")

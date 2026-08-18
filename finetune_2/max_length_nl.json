@@ -1,0 +1,11 @@
+{
+  "total_examples": 182336,
+  "max_tokens_observed": 2860,
+  "p50_tokens": 1200,
+  "p95_tokens": 2185,
+  "p99_tokens": 2860,
+  "examples_over_2048": 33074,
+  "examples_over_4096": 0,
+  "margin_applied": 1.1,
+  "recommended_max_length": 3200
+}
