@@ -1,0 +1,63 @@
+======================================================================
+V2-FIXED LDS RESOLUTION REPORT
+Cycle-freeness, k, makespan and gap%, val_1950 instance set
+======================================================================
+
+-- SCOPE --
+
+Total instances in validation set:                1950
+Structurally valid, sent to the solver:           6 (0.31%)
+
+All figures below are computed over this structurally valid pool
+unless stated otherwise as a percentage of the full 1950-instance set.
+
+-- LDS SEARCH OUTCOME --
+
+  Solved (minimal k found):      6 (100.0% of pool)
+  k_cap exceeded (never solved):  0 (0.0% of pool)
+  Timeout, undetermined:          0 (0.0% of pool)
+
+-- CYCLE-FREENESS AND DISCREPANCIES (over solved subset) --
+
+  Cycle-free at k=0:               6 (100.0% of solved, 0.31% of all 1950 instances)
+  Needed discrepancies (k>0):       0
+  k -- mean: 0, median: 0.0, max: 0
+
+-- GAP TO BEST KNOWN MAKESPAN (over solved subset) --
+
+  Coverage: 6 instances (0.31% of all 1950 instances)
+  mean:   14.347%
+  median: 16.224%
+  min:    3.87%
+  max:    23.206%
+
+NOTE: gap% here reflects the makespan found by the solver AFTER
+resolving k discrepancies -- not the LLM's raw proposal. It should be
+read as 'quality of the LLM-guided search result', not 'quality of the
+LLM's own answer' (unlike V4's gap%, computed on a direct decode).
+
+LDS solve time (sec) -- mean: 0.343, median: 0.335, max: 0.41
+
+----------------------------------------------------------------------
+-- BREAKDOWN BY INSTANCE SIZE --
+
+    Size |  N_tot | N_pool |  Solved% |  CycFree% |  k_mean |  k_max |  Gap_mean% |  N_gap | SolveT_mean
+--------------------------------------------------------------------------------------------------------
+     3x3 |    131 |      0 |     None |      None |    None |   None |       None |      0 |        None
+     4x4 |    144 |      0 |     None |      None |    None |   None |       None |      0 |        None
+     5x5 |    135 |      0 |     None |      None |    None |   None |       None |      0 |        None
+     6x6 |    126 |      1 |    100.0 |     100.0 |       0 |      0 |       3.87 |      1 |        0.24
+     8x6 |    160 |      1 |    100.0 |     100.0 |       0 |      0 |      9.375 |      1 |        0.41
+     8x8 |    144 |      0 |     None |      None |    None |   None |       None |      0 |        None
+    10x8 |    168 |      0 |     None |      None |    None |   None |       None |      0 |        None
+   10x10 |    143 |      0 |     None |      None |    None |   None |       None |      0 |        None
+   12x10 |    149 |      3 |    100.0 |     100.0 |       0 |      0 |     18.866 |      3 |       0.333
+   12x12 |    176 |      1 |    100.0 |     100.0 |       0 |      0 |     16.239 |      1 |        0.41
+   15x12 |    148 |      0 |     None |      None |    None |   None |       None |      0 |        None
+   15x15 |    168 |      0 |     None |      None |    None |   None |       None |      0 |        None
+   20x15 |    158 |      0 |     None |      None |    None |   None |       None |      0 |        None
+
+NOTE: N_pool is the number of structurally valid instances at this size
+(from analyze_v2fixed.py); 'Solved%' is the share of N_pool for which the
+solver found a minimal k within the k_cap; k_mean/k_max/Gap/SolveT are
+computed only over the solved subset at this size.

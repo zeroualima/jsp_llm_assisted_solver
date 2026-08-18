@@ -1,0 +1,71 @@
+======================================================================
+V2-FIXED FINE-TUNED MODEL EVALUATION REPORT
+Per-machine job sequences, val_1950 instance set
+======================================================================
+
+-- OVERALL SUMMARY --
+
+Total instances evaluated:              1950
+
+Response format distribution:
+  Clean (exact 'sequences' key, correct shape):  0 (0.0%)
+  Needed permissive reparse:                     6 (0.31%)
+  Unparseable (no matrix recoverable at all):    1944 (99.69%)
+
+Structural validity (each machine row is a permutation of the jobs):
+  Valid:   6 (0.31%)
+  Invalid: 1944
+
+Structural validity rate WITHIN each format category:
+  clean           :     0 instances, None% structurally valid
+  needed_reparse  :     6 instances, 100.0% structurally valid
+  unparseable     :  1944 instances, 0.0% structurally valid
+
+NOTE: unparseable responses are valid 0% of the time by definition
+(no matrix could be recovered at all). The comparison that matters is
+between 'clean' and 'needed_reparse': if reparse-recovered matrices are
+valid about as often as clean ones, the reparse step is recovering
+genuinely usable data, not noise.
+
+Generation time (sec) - mean: 5.34, median: 0.31, max: 97.84
+
+----------------------------------------------------------------------
+-- WHY STRUCTURALLY INVALID (breakdown of failure reasons) --
+
+  no_matrix_recovered         :  1944  (100.0% of invalid, 99.69% of total)
+
+NOTE: 'duplicate_or_missing_job' is the category most relevant to the
+triplet-based re-fine-tuning idea (a well-formed matrix with an internal
+inconsistency). Other categories (wrong row count/length, no matrix
+recovered) reflect the model failing to produce the expected structure
+at all, which a cycle/error-correction triplet would not address.
+
+----------------------------------------------------------------------
+-- SCHEMA KEY ADHERENCE (JSON key detected, where applicable) --
+
+  (no key / not JSON) :  1950  (100.0%)
+
+----------------------------------------------------------------------
+-- BREAKDOWN BY INSTANCE SIZE --
+
+    Size |     N |  Clean% |  Reparse% |  Unparse% |  StructValid% |  GenT_mean |  GenT_max
+-------------------------------------------------------------------------------------------
+     3x3 |   131 |     0.0 |       0.0 |     100.0 |           0.0 |      0.282 |       8.9
+     4x4 |   144 |     0.0 |       0.0 |     100.0 |           0.0 |      0.313 |      4.06
+     5x5 |   135 |     0.0 |       0.0 |     100.0 |           0.0 |      1.158 |     96.83
+     6x6 |   126 |     0.0 |      0.79 |     99.21 |          0.79 |      0.313 |      8.34
+     8x6 |   160 |     0.0 |      0.62 |     99.38 |          0.62 |       2.91 |     96.15
+     8x8 |   144 |     0.0 |       0.0 |     100.0 |           0.0 |      1.232 |     88.92
+    10x8 |   168 |     0.0 |       0.0 |     100.0 |           0.0 |      6.103 |      96.5
+   10x10 |   143 |     0.0 |       0.0 |     100.0 |           0.0 |      8.896 |     97.69
+   12x10 |   149 |     0.0 |      2.01 |     97.99 |          2.01 |       5.81 |     97.66
+   12x12 |   176 |     0.0 |      0.57 |     99.43 |          0.57 |      6.364 |     97.84
+   15x12 |   148 |     0.0 |       0.0 |     100.0 |           0.0 |     14.948 |     97.76
+   15x15 |   168 |     0.0 |       0.0 |     100.0 |           0.0 |       5.03 |     97.47
+   20x15 |   158 |     0.0 |       0.0 |     100.0 |           0.0 |     13.616 |     97.37
+
+NOTE: no gap% or makespan figures are included here. Structural validity
+only confirms each machine row is a permutation of the jobs -- it does NOT
+guarantee the matrix is cycle-free across machines. Gap% requires solving
+the structurally valid subset via MiniZinc/CP-SAT (k=0 feasibility check),
+which is the next planned stage, not included in this report.

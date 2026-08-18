@@ -1,0 +1,78 @@
+======================================================================
+V4 FINE-TUNED MODEL EVALUATION REPORT
+Bierwirth operation-array warm-start, val_1950 instance set
+======================================================================
+
+-- OVERALL SUMMARY --
+
+Total instances evaluated:              1950
+Clean-schema responses (op_array, no leading junk): 1622 (83.18%)
+Responses needing permissive reparse:   328 (16.82%)
+Responses with no array extractable at all: 18
+
+Feasible (valid schedule) responses:    1501 (76.97%)
+Infeasible responses:                   449
+  of which recoverable via truncation to expected length: 0
+
+Generation time (sec) - mean: 18.104, median: 11.315, max: 49.66
+
+Gap %% vs best known makespan (feasible instances only, n=1501, 76.97% of total):
+  mean:   49.915%
+  median: 48.492%
+  min:    0.0%
+  max:    173.016%
+
+NOTE: gap%% figures above only cover the feasible subset. They are NOT
+representative of overall model reliability by themselves -- always report
+them alongside the feasibility rate above, since a high gap%% quality on a
+small feasible subset can look misleadingly good in isolation.
+
+----------------------------------------------------------------------
+-- SCHEMA KEY ADHERENCE (what JSON key did the model actually emit) --
+
+  op_array            :  1653  (84.77%)
+  assignment          :   122  (6.26%)
+  assignation         :   104  (5.33%)
+  machines            :    43  (2.21%)
+  (no key detected)   :    18  (0.92%)
+  assignations        :     7  (0.36%)
+  ast                 :     2  (0.1%)
+  setups              :     1  (0.05%)
+
+----------------------------------------------------------------------
+-- BREAKDOWN BY INSTANCE SIZE --
+
+    Size |     N |  Feasible |  Feas.% |  Clean% |  GenT_mean |  GenT_max |  Gap_mean% |  Gap_med% |  N_gap
+-----------------------------------------------------------------------------------------------------------
+     3x3 |   131 |       130 |   99.24 |   99.24 |      1.592 |      8.96 |     10.046 |     4.939 |    130
+     4x4 |   144 |       144 |   100.0 |   97.22 |      2.671 |      2.71 |     16.811 |    15.206 |    144
+     5x5 |   135 |       133 |   98.52 |   89.63 |       4.01 |      4.06 |     20.863 |    22.128 |    133
+     6x6 |   126 |       102 |   80.95 |   28.57 |      6.248 |     11.96 |     29.872 |    29.507 |    102
+     8x6 |   160 |       154 |   96.25 |   46.25 |      6.679 |      6.84 |     42.249 |    40.944 |    154
+     8x8 |   144 |       135 |   93.75 |   43.06 |      8.831 |      9.28 |     44.579 |    44.214 |    135
+    10x8 |   168 |       147 |    87.5 |   70.83 |     10.999 |     12.65 |     63.542 |    61.979 |    147
+   10x10 |   143 |       142 |    99.3 |    99.3 |     13.728 |     27.82 |     58.145 |    56.545 |    142
+   12x10 |   149 |       147 |   98.66 |   99.33 |     16.279 |     16.45 |     80.331 |    78.194 |    147
+   12x12 |   176 |       173 |    98.3 |   100.0 |     19.828 |      21.8 |     80.853 |    76.654 |    173
+   15x12 |   148 |        62 |   41.89 |   100.0 |     39.591 |     49.66 |     98.184 |    95.652 |     62
+   15x15 |   168 |        32 |   19.05 |   100.0 |     45.719 |     49.31 |    105.285 |    102.32 |     32
+   20x15 |   158 |         0 |     0.0 |   100.0 |     49.207 |     49.45 |       None |      None |      0
+
+----------------------------------------------------------------------
+-- FAILURE MODE BREAKDOWN BY SIZE (infeasible responses only) --
+
+    Size |  Wrong length (degenerate) |   No array/key found
+------------------------------------------------------------
+     3x3 |                          1 |                    0
+     4x4 |                          0 |                    0
+     5x5 |                          0 |                    2
+     6x6 |                         21 |                    3
+     8x6 |                          2 |                    4
+     8x8 |                          4 |                    5
+    10x8 |                         17 |                    3
+   10x10 |                          1 |                    0
+   12x10 |                          0 |                    1
+   12x12 |                          0 |                    0
+   15x12 |                         84 |                    0
+   15x15 |                        132 |                    0
+   20x15 |                        158 |                    0

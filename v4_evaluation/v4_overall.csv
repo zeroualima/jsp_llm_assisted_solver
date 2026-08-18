@@ -1,0 +1,2 @@
+n_instances,n_clean_format,n_needed_reparse,n_no_array_extractable,n_feasible_full,n_infeasible_full,n_feasible_truncated_only,gen_time_mean_sec,gen_time_median_sec,gen_time_max_sec,feasibility_rate_pct,clean_format_rate_pct,reparse_needed_rate_pct,gap_pct_mean_feasible_only,gap_pct_median_feasible_only,gap_pct_min_feasible_only,gap_pct_max_feasible_only,gap_coverage_pct
+1950,1622,328,18,1501,449,0,18.104,11.315,49.66,76.97,83.18,16.82,49.915,48.492,0.0,173.016,76.97

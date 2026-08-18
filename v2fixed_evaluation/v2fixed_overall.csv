@@ -1,0 +1,2 @@
+n_instances,n_clean_format,n_needed_reparse,n_unparseable,clean_format_rate_pct,reparse_needed_rate_pct,unparseable_rate_pct,n_structurally_valid,n_structurally_invalid,structural_validity_rate_pct,gen_time_mean_sec,gen_time_median_sec,gen_time_max_sec,n_clean,clean_valid_rate_pct,needed_reparse_valid_rate_pct,unparseable_valid_rate_pct
+1950,187,523,1240,9.59,26.82,63.59,511,1439,26.21,16.812,8.24,107.51,187,100.0,61.95,0.0
